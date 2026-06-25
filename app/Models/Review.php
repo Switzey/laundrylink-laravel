@@ -23,6 +23,29 @@ class Review extends Model
         'comment',
     ];
 
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'rating' => 'integer',
+        ];
+    }
+
+    public static function refreshCleanerRating(Cleaner $cleaner): void
+    {
+        $average = (float) static::query()
+            ->where('cleaner_id', $cleaner->id)
+            ->avg('rating');
+
+        $cleaner->update([
+            'rating' => round($average, 1),
+        ]);
+    }
+
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);

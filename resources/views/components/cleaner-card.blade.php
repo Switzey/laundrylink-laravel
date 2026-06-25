@@ -14,13 +14,15 @@
 
         <p class="text-sm leading-6 text-neutral-600">{{ $cleaner->description }}</p>
 
+        <x-rating-stars :rating="$cleaner->rating" :count="$cleaner->reviews_count ?? null" />
+
         <dl class="grid grid-cols-2 gap-3 text-sm">
             <div class="rounded-md bg-neutral-50 p-3">
                 <dt class="text-neutral-500">Turnaround</dt>
                 <dd class="font-semibold text-neutral-900">{{ $cleaner->turnaround_time ?? 'Flexible' }}</dd>
             </div>
             <div class="rounded-md bg-neutral-50 p-3">
-                <dt class="text-neutral-500">Services</dt>
+                <dt class="text-neutral-500">Active services</dt>
                 <dd class="font-semibold text-neutral-900">{{ $cleaner->services_count ?? $cleaner->services->count() }}</dd>
             </div>
         </dl>

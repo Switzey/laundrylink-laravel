@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
     {
         User::query()->create([
             'name' => 'Ada Admin',
-            'email' => 'admin@laundrylink.test',
+            'email' => 'admin@example.com',
             'password' => Hash::make('password'),
             'role' => 'admin',
             'phone' => '08010000001',
@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
         $customers = collect([
             [
                 'name' => 'Tola Martins',
-                'email' => 'tola@example.com',
+                'email' => 'customer@example.com',
                 'phone' => '08020000001',
                 'address' => '14 Admiralty Way, Lekki',
                 'city' => 'Lagos',
@@ -64,25 +64,28 @@ class DatabaseSeeder extends Seeder
                 'city' => $index === 0 ? 'Lagos' : 'Abuja',
                 'phone' => $customer->phone,
                 'is_default' => true,
+                'delivery_notes' => $index === 0 ? 'Call at the estate gate before arrival.' : 'Use the main entrance reception.',
             ]);
         });
 
         $cleanerProfiles = [
             [
-                'user' => ['name' => 'Bisi Fresh', 'email' => 'bisi@freshfold.test', 'phone' => '08030000001'],
+                'user' => ['name' => 'Bisi Fresh', 'email' => 'cleaner@example.com', 'phone' => '08030000001'],
                 'business_name' => 'FreshFold Laundry',
                 'description' => 'Neighborhood wash, fold, and dry-cleaning with careful packaging for busy homes.',
                 'address' => '8 Admiralty Road',
                 'city' => 'Lagos',
                 'phone' => '08030000001',
-                'rating' => 4.8,
+                'rating' => 0,
                 'turnaround_time' => '24-48 hours',
+                'opening_hours' => 'Mon-Sat, 8am-6pm',
+                'is_available' => true,
                 'is_approved' => true,
                 'services' => [
-                    ['name' => 'Shirt Laundry', 'description' => 'Washed, pressed, and folded shirts.', 'price' => 1200, 'unit' => 'per_item'],
-                    ['name' => 'Suit Dry Cleaning', 'description' => 'Two-piece suit care with finishing.', 'price' => 6500, 'unit' => 'per_item'],
-                    ['name' => 'Wash & Fold', 'description' => 'Everyday clothing by weight.', 'price' => 1800, 'unit' => 'per_kg'],
-                    ['name' => 'Bedding Set', 'description' => 'Sheets, pillowcases, and duvet cover.', 'price' => 5000, 'unit' => 'flat'],
+                    ['name' => 'Shirt Laundry', 'description' => 'Washed, pressed, and folded shirts.', 'price' => 1200, 'unit' => 'per_item', 'is_active' => true],
+                    ['name' => 'Suit Dry Cleaning', 'description' => 'Two-piece suit care with finishing.', 'price' => 6500, 'unit' => 'per_item', 'is_active' => true],
+                    ['name' => 'Wash & Fold', 'description' => 'Everyday clothing by weight.', 'price' => 1800, 'unit' => 'per_kg', 'is_active' => true],
+                    ['name' => 'Bedding Set', 'description' => 'Sheets, pillowcases, and duvet cover.', 'price' => 5000, 'unit' => 'flat', 'is_active' => true],
                 ],
             ],
             [
@@ -92,14 +95,16 @@ class DatabaseSeeder extends Seeder
                 'address' => '31 Allen Avenue',
                 'city' => 'Ikeja',
                 'phone' => '08030000002',
-                'rating' => 4.6,
+                'rating' => 0,
                 'turnaround_time' => 'Same day',
+                'opening_hours' => 'Mon-Fri, 7am-7pm',
+                'is_available' => true,
                 'is_approved' => true,
                 'services' => [
-                    ['name' => 'Office Shirt', 'description' => 'Crisp shirt laundry and press.', 'price' => 1000, 'unit' => 'per_item'],
-                    ['name' => 'Trouser Press', 'description' => 'Steam press and fold.', 'price' => 900, 'unit' => 'per_item'],
-                    ['name' => 'Agbada Care', 'description' => 'Special care for traditional outfits.', 'price' => 7500, 'unit' => 'per_item'],
-                    ['name' => 'Express Wash', 'description' => 'Priority wash bundle.', 'price' => 4000, 'unit' => 'flat'],
+                    ['name' => 'Office Shirt', 'description' => 'Crisp shirt laundry and press.', 'price' => 1000, 'unit' => 'per_item', 'is_active' => true],
+                    ['name' => 'Trouser Press', 'description' => 'Steam press and fold.', 'price' => 900, 'unit' => 'per_item', 'is_active' => true],
+                    ['name' => 'Agbada Care', 'description' => 'Special care for traditional outfits.', 'price' => 7500, 'unit' => 'per_item', 'is_active' => true],
+                    ['name' => 'Express Wash', 'description' => 'Priority wash bundle.', 'price' => 4000, 'unit' => 'flat', 'is_active' => true],
                 ],
             ],
             [
@@ -109,14 +114,16 @@ class DatabaseSeeder extends Seeder
                 'address' => '16 Gana Street',
                 'city' => 'Abuja',
                 'phone' => '08030000003',
-                'rating' => 4.9,
+                'rating' => 0,
                 'turnaround_time' => '48 hours',
+                'opening_hours' => 'Mon-Sat, 9am-5pm',
+                'is_available' => true,
                 'is_approved' => true,
                 'services' => [
-                    ['name' => 'Dress Dry Cleaning', 'description' => 'Gentle dry cleaning for dresses.', 'price' => 4500, 'unit' => 'per_item'],
-                    ['name' => 'Curtain Cleaning', 'description' => 'Deep clean for curtains by weight.', 'price' => 2500, 'unit' => 'per_kg'],
-                    ['name' => 'Delicate Fabric Care', 'description' => 'Silk, lace, and special garments.', 'price' => 6000, 'unit' => 'per_item'],
-                    ['name' => 'Duvet Cleaning', 'description' => 'Large duvet wash and dry.', 'price' => 7000, 'unit' => 'flat'],
+                    ['name' => 'Dress Dry Cleaning', 'description' => 'Gentle dry cleaning for dresses.', 'price' => 4500, 'unit' => 'per_item', 'is_active' => true],
+                    ['name' => 'Curtain Cleaning', 'description' => 'Deep clean for curtains by weight.', 'price' => 2500, 'unit' => 'per_kg', 'is_active' => true],
+                    ['name' => 'Delicate Fabric Care', 'description' => 'Silk, lace, and special garments.', 'price' => 6000, 'unit' => 'per_item', 'is_active' => true],
+                    ['name' => 'Duvet Cleaning', 'description' => 'Large duvet wash and dry.', 'price' => 7000, 'unit' => 'flat', 'is_active' => true],
                 ],
             ],
             [
@@ -128,12 +135,14 @@ class DatabaseSeeder extends Seeder
                 'phone' => '08030000004',
                 'rating' => 0,
                 'turnaround_time' => '72 hours',
+                'opening_hours' => 'Mon-Sat, 8am-4pm',
+                'is_available' => true,
                 'is_approved' => false,
                 'services' => [
-                    ['name' => 'Family Wash Bag', 'description' => 'Mixed family laundry package.', 'price' => 9500, 'unit' => 'flat'],
-                    ['name' => 'Children Wear', 'description' => 'Gentle wash for kids clothing.', 'price' => 800, 'unit' => 'per_item'],
-                    ['name' => 'Sneaker Cleaning', 'description' => 'Hand clean and air dry sneakers.', 'price' => 3500, 'unit' => 'per_item'],
-                    ['name' => 'Towel Bundle', 'description' => 'Bath and hand towel bundle.', 'price' => 2200, 'unit' => 'per_kg'],
+                    ['name' => 'Family Wash Bag', 'description' => 'Mixed family laundry package.', 'price' => 9500, 'unit' => 'flat', 'is_active' => true],
+                    ['name' => 'Children Wear', 'description' => 'Gentle wash for kids clothing.', 'price' => 800, 'unit' => 'per_item', 'is_active' => true],
+                    ['name' => 'Sneaker Cleaning', 'description' => 'Hand clean and air dry sneakers.', 'price' => 3500, 'unit' => 'per_item', 'is_active' => true],
+                    ['name' => 'Towel Bundle', 'description' => 'Bath and hand towel bundle.', 'price' => 2200, 'unit' => 'per_kg', 'is_active' => true],
                 ],
             ],
         ];
@@ -157,6 +166,8 @@ class DatabaseSeeder extends Seeder
                 'phone' => $profile['phone'],
                 'rating' => $profile['rating'],
                 'turnaround_time' => $profile['turnaround_time'],
+                'opening_hours' => $profile['opening_hours'],
+                'is_available' => $profile['is_available'],
                 'is_approved' => $profile['is_approved'],
             ]);
 
@@ -166,6 +177,7 @@ class DatabaseSeeder extends Seeder
                 'description' => $service['description'],
                 'price' => $service['price'],
                 'unit' => $service['unit'],
+                'is_active' => $service['is_active'],
             ]));
 
             return $cleaner;
@@ -179,6 +191,7 @@ class DatabaseSeeder extends Seeder
             ['status' => 'ready', 'customer' => 0, 'cleaner' => 1, 'days_ago' => 5, 'delivery_fee' => 1000, 'platform_fee' => 500],
             ['status' => 'out_for_delivery', 'customer' => 1, 'cleaner' => 2, 'days_ago' => 6, 'delivery_fee' => 1600, 'platform_fee' => 900],
             ['status' => 'completed', 'customer' => 0, 'cleaner' => 0, 'days_ago' => 12, 'delivery_fee' => 1200, 'platform_fee' => 800],
+            ['status' => 'cancelled', 'customer' => 1, 'cleaner' => 1, 'days_ago' => 8, 'delivery_fee' => 1000, 'platform_fee' => 500],
         ];
 
         collect($orders)->each(function (array $orderData, int $index) use ($customers, $cleaners): void {
@@ -194,10 +207,14 @@ class DatabaseSeeder extends Seeder
                 'pickup_address' => $customer->address,
                 'delivery_address' => $customer->address,
                 'pickup_date' => $createdAt->copy()->addDay()->toDateString(),
+                'pickup_time_window' => ['8am - 10am', '10am - 12pm', '12pm - 2pm'][$index % 3],
                 'delivery_date' => $createdAt->copy()->addDays(3)->toDateString(),
+                'delivery_time_window' => ['12pm - 2pm', '2pm - 4pm', '4pm - 6pm'][$index % 3],
                 'status' => $orderData['status'],
                 'delivery_fee' => $orderData['delivery_fee'],
                 'platform_fee' => $orderData['platform_fee'],
+                'pickup_notes' => 'Confirm pickup window with customer.',
+                'delivery_notes' => 'Deliver to the saved customer address.',
                 'notes' => $index % 2 === 0 ? 'Please call before pickup.' : 'Use gentle handling for delicate items.',
                 'created_at' => $createdAt,
                 'updated_at' => $createdAt,
@@ -215,20 +232,30 @@ class DatabaseSeeder extends Seeder
                 ]);
             });
 
-            $order->update([
-                'subtotal' => $subtotal,
-                'total' => $subtotal + $orderData['delivery_fee'] + $orderData['platform_fee'],
-            ]);
-
-            Payment::query()->create([
-                'order_id' => $order->id,
-                'amount' => $order->total,
-                'provider' => null,
-                'reference' => null,
-                'status' => $orderData['status'] === 'completed' ? 'paid' : 'pending',
-            ]);
-
             if ($orderData['status'] === 'completed') {
+                $paidAt = $createdAt->copy()->addDays(3);
+
+                $order->update([
+                    'subtotal' => $subtotal,
+                    'total' => $subtotal + $orderData['delivery_fee'] + $orderData['platform_fee'],
+                    'payment_status' => 'paid',
+                    'paid_at' => $paidAt,
+                ]);
+
+                Payment::query()->create([
+                    'order_id' => $order->id,
+                    'customer_id' => $customer->id,
+                    'amount' => $order->total,
+                    'provider' => 'manual',
+                    'reference' => 'LL-SEED-'.$order->id,
+                    'status' => 'paid',
+                    'paid_at' => $paidAt,
+                    'metadata' => [
+                        'seeded' => true,
+                        'status' => 'success',
+                    ],
+                ]);
+
                 Review::query()->create([
                     'order_id' => $order->id,
                     'customer_id' => $customer->id,
@@ -236,7 +263,16 @@ class DatabaseSeeder extends Seeder
                     'rating' => 5,
                     'comment' => 'Great pickup timing and neat packaging.',
                 ]);
+
+                Review::refreshCleanerRating($cleaner);
+
+                return;
             }
+
+            $order->update([
+                'subtotal' => $subtotal,
+                'total' => $subtotal + $orderData['delivery_fee'] + $orderData['platform_fee'],
+            ]);
         });
     }
 }

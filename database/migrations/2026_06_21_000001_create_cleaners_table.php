@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('phone');
             $table->decimal('rating', 2, 1)->default(0);
             $table->string('turnaround_time')->nullable();
+            $table->string('opening_hours')->nullable();
+            $table->boolean('is_available')->default(true);
             $table->boolean('is_approved')->default(false);
             $table->timestamps();
         });

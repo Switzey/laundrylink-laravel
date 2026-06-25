@@ -13,7 +13,7 @@
                 <label class="mt-3 block text-xs font-semibold uppercase tracking-[0.16em] text-neutral-500" for="service-{{ $service->id }}">
                     Qty
                 </label>
-                <input id="service-{{ $service->id }}" name="services[{{ $service->id }}]" type="number" value="0" min="0" class="mt-1 w-24 rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-100">
+                <input id="service-{{ $service->id }}" name="services[{{ $service->id }}]" type="number" value="{{ old("services.{$service->id}", 0) }}" min="0" class="mt-1 w-24 rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-100">
             @endif
         </div>
     </div>

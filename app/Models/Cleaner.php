@@ -25,6 +25,8 @@ class Cleaner extends Model
         'phone',
         'rating',
         'turnaround_time',
+        'opening_hours',
+        'is_available',
         'is_approved',
     ];
 
@@ -37,6 +39,7 @@ class Cleaner extends Model
     {
         return [
             'rating' => 'decimal:1',
+            'is_available' => 'boolean',
             'is_approved' => 'boolean',
         ];
     }

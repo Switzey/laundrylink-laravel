@@ -22,6 +22,7 @@ class Address extends Model
         'city',
         'phone',
         'is_default',
+        'delivery_notes',
     ];
 
     /**

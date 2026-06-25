@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('city');
             $table->string('phone')->nullable();
             $table->boolean('is_default')->default(false);
+            $table->text('delivery_notes')->nullable();
             $table->timestamps();
         });
     }

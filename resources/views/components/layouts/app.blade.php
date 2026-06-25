@@ -3,11 +3,34 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ $title ?? config('app.name', 'LaundryLink') }}</title>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="min-h-screen">
         <x-navbar />
+
+        @if (session('success') || session('error') || session('status'))
+            <div class="container-shell pt-6">
+                @if (session('success'))
+                    <div class="rounded-lg border border-teal-200 bg-teal-50 px-4 py-3 text-sm font-semibold text-teal-900">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if (session('error'))
+                    <div class="rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-semibold text-rose-900">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
+                @if (session('status'))
+                    <div class="rounded-lg border border-sky-200 bg-sky-50 px-4 py-3 text-sm font-semibold text-sky-900">
+                        {{ session('status') }}
+                    </div>
+                @endif
+            </div>
+        @endif
 
         <main>
             {{ $slot }}

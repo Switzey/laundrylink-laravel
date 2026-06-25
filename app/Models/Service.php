@@ -22,6 +22,7 @@ class Service extends Model
         'description',
         'price',
         'unit',
+        'is_active',
     ];
 
     /**
@@ -33,6 +34,7 @@ class Service extends Model
     {
         return [
             'price' => 'decimal:2',
+            'is_active' => 'boolean',
         ];
     }
 

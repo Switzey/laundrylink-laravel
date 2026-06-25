@@ -17,10 +17,15 @@ class Payment extends Model
      */
     protected $fillable = [
         'order_id',
+        'customer_id',
         'amount',
         'provider',
         'reference',
+        'authorization_url',
+        'access_code',
         'status',
+        'paid_at',
+        'metadata',
     ];
 
     /**
@@ -32,11 +37,18 @@ class Payment extends Model
     {
         return [
             'amount' => 'decimal:2',
+            'paid_at' => 'datetime',
+            'metadata' => 'array',
         ];
     }
 
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
+    }
+
+    public function customer(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'customer_id');
     }
 }

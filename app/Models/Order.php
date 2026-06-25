@@ -23,12 +23,18 @@ class Order extends Model
         'pickup_address',
         'delivery_address',
         'pickup_date',
+        'pickup_time_window',
         'delivery_date',
+        'delivery_time_window',
         'status',
         'subtotal',
         'delivery_fee',
         'platform_fee',
         'total',
+        'payment_status',
+        'paid_at',
+        'pickup_notes',
+        'delivery_notes',
         'notes',
     ];
 
@@ -42,6 +48,7 @@ class Order extends Model
         return [
             'pickup_date' => 'date',
             'delivery_date' => 'date',
+            'paid_at' => 'datetime',
             'subtotal' => 'decimal:2',
             'delivery_fee' => 'decimal:2',
             'platform_fee' => 'decimal:2',
@@ -72,5 +79,18 @@ class Order extends Model
     public function review(): HasOne
     {
         return $this->hasOne(Review::class);
+    }
+
+    public function activities(): HasMany
+    {
+        return $this->hasMany(OrderActivity::class);
+    }
+
+    public function isReviewableBy(User $user): bool
+    {
+        return $this->customer_id === $user->id
+            && $this->status === 'completed'
+            && $this->payment_status === 'paid'
+            && ! $this->review()->exists();
     }
 }

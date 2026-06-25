@@ -14,10 +14,15 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('customer_id')->nullable()->constrained('users')->nullOnDelete();
             $table->decimal('amount', 10, 2);
-            $table->string('provider')->nullable();
+            $table->string('provider')->default('manual');
             $table->string('reference')->nullable();
+            $table->string('authorization_url')->nullable();
+            $table->string('access_code')->nullable();
             $table->string('status')->default('pending');
+            $table->timestamp('paid_at')->nullable();
+            $table->json('metadata')->nullable();
             $table->timestamps();
         });
     }

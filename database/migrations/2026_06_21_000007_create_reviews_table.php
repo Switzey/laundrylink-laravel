@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('order_id')->unique()->constrained()->cascadeOnDelete();
             $table->foreignId('customer_id')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('cleaner_id')->constrained()->cascadeOnDelete();
             $table->integer('rating');
