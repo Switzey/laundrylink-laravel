@@ -12,6 +12,7 @@ use App\Models\Service;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -23,6 +24,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        if (User::query()->where('email', 'admin@example.com')->exists()) {
+            return;
+        }
+
+        DB::beginTransaction();
+
+        try {
         User::query()->create([
             'name' => 'Ada Admin',
             'email' => 'admin@example.com',
@@ -274,5 +282,11 @@ class DatabaseSeeder extends Seeder
                 'total' => $subtotal + $orderData['delivery_fee'] + $orderData['platform_fee'],
             ]);
         });
+        DB::commit();
+        } catch (\Throwable $exception) {
+            DB::rollBack();
+
+            throw $exception;
+        }
     }
 }
