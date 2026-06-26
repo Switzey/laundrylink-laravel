@@ -7,7 +7,7 @@
       "runtime": "vercel-php@0.9.0"
     }
   },
-  "buildCommand": "npm run build",
+  "buildCommand": "npm run build && DB_URL=\"${DATABASE_URL_UNPOOLED:-$DATABASE_POSTGRES_URL_NON_POOLING}\" php artisan migrate --force && DB_URL=\"${DATABASE_URL_UNPOOLED:-$DATABASE_POSTGRES_URL_NON_POOLING}\" php artisan db:seed --force",
   "outputDirectory": "public",
   "routes": [
     {
